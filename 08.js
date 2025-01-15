@@ -11,7 +11,16 @@
  * @param {string} url
  * @returns {Promise<string[]>}
  */
-async function extractNames(url) {}
+async function extractNames(url) {
+  try {
+    const res1 = await fetch(url);
+    const res2 = await res1.json();
+    const records = res2.result.records;
+    return records.map((n) => n.detail.name);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 // export 수정 불가
 export { extractNames };
